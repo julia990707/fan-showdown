@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>決戰粉絲之巔</title>
+<style>
+:root{--bg:#f4f1fb;--card:#fff;--tx:#241b3a;--mu:#6e6488;--ac:#7c3aed;--ac2:#ec4899;--bd:#ddd5f0;--ok:#16a34a;--no:#dc2626;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17122a;--card:#241d3d;--tx:#f1ecff;--mu:#a99fc8;--bd:#3a3059}}
+:root[data-theme="dark"]{--bg:#17122a;--card:#241d3d;--tx:#f1ecff;--mu:#a99fc8;--bd:#3a3059}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;min-height:100vh}
+nav{display:flex;gap:6px;justify-content:center;padding:12px;background:linear-gradient(90deg,var(--ac),var(--ac2));position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.chip{color:#fff;font-size:12px;align-self:center;opacity:.9;width:100%;text-align:center}
+nav{flex-wrap:wrap}
+nav button{background:rgba(255,255,255,.18);color:#fff;border:0;padding:9px 18px;border-radius:99px;font-size:15px;cursor:pointer}
+nav button.on{background:#fff;color:var(--ac);font-weight:700}
+main{max-width:860px;margin:0 auto;padding:20px 16px 90px}
+.view{display:none}.view.on{display:block}
+h1{text-align:center;font-size:34px;margin:30px 0 6px;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{text-align:center;color:var(--mu);margin-bottom:34px}
+.big{display:flex;flex-direction:column;gap:14px;max-width:340px;margin:0 auto}
+.bt{border:0;border-radius:14px;padding:14px 22px;font-size:17px;cursor:pointer;background:linear-gradient(90deg,var(--ac),var(--ac2));color:#fff;font-weight:600}
+.bt.g{background:transparent;color:var(--mu);border:1px solid var(--bd)}
+.bt.sm{padding:8px 14px;font-size:14px;border-radius:10px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;margin-bottom:14px;position:relative}
+.card h3{margin:0 0 4px}.mu{color:var(--mu);font-size:14px}
+.card .go{display:block;margin:12px 0 0 auto}
+.top3{margin:10px 0 0;padding:10px 12px;background:var(--bg);border-radius:12px;font-size:14px}
+.top3 div{display:flex;justify-content:space-between}
+.ov{position:fixed;inset:0;background:rgba(10,5,25,.6);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.md{background:var(--card);border-radius:20px;padding:20px;width:100%;max-width:460px;max-height:90vh;overflow:auto}
+.md h3{margin:0 0 12px}
+.md label.f{display:block;margin:10px 0 4px;font-size:14px;color:var(--mu)}
+.md input[type=text],.md input[type=password],.md textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font-size:16px;font-family:inherit}
+.mf{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips label{border:1px solid var(--bd);padding:8px 14px;border-radius:99px;cursor:pointer;font-size:15px}
+.chips label:has(input:checked){background:var(--ac);color:#fff;border-color:var(--ac)}
+.chips input{display:none}
+.ed{display:flex;border:1px solid var(--bd);border-radius:10px;background:var(--bg);overflow:hidden}
+.gut{padding:10px 8px;text-align:right;color:var(--mu);font:14px/24px monospace;background:rgba(124,58,237,.08);min-width:34px;overflow:hidden;height:150px;user-select:none}
+.ed textarea{border:0!important;border-radius:0!important;font:14px/24px monospace!important;height:150px;white-space:pre;overflow:auto;resize:none}
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));box-shadow:0 6px 18px rgba(0,0,0,.3)}
+ul.sl{list-style:disc;padding-left:22px}ul.sl li{margin:8px 0}
+.bar{height:14px;background:var(--bd);border-radius:99px;overflow:hidden;margin:14px 0}
+.bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.q{font-size:22px;text-align:center;padding:28px 14px;background:var(--card);border:1px solid var(--bd);border-radius:18px;margin-bottom:14px;line-height:1.5}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{padding:16px 10px;border-radius:14px;border:2px solid var(--bd);background:var(--card);color:var(--tx);font-size:16px;cursor:pointer;min-height:64px}
+.opt.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.opt.no{background:var(--no);color:#fff;border-color:var(--no)}
+@media(max-width:520px){.opts{grid-template-columns:1fr}nav button{padding:8px 12px;font-size:14px}}
+input.name{width:100%;padding:12px;font-size:18px;border:1px solid var(--bd);border-radius:12px;background:var(--card);color:var(--tx)}
+</style>
+</head>
+<body>
+<nav>
+<button data-v="home" class="on">主頁</button><button data-v="overview">題庫總覽</button><button data-v="player">玩家資料</button>
+<span id="mode" class="chip"></span></nav>
+<main>
+<section id="home" class="view on">
+<h1>決戰粉絲之巔</h1><div class="sub">你有多愛這些歌？來場歌詞大挑戰</div>
+<div class="big"><button class="bt" id="bCreate">建立題庫</button><button class="bt" id="bEdit">編輯題庫</button><button class="bt" id="bPlay">遊玩題庫</button></div>
+</section>
+<section id="overview" class="view"><div id="ovList"></div></section>
+<section id="player" class="view">
+<label class="mu">玩家名稱（至多 10 字）</label>
+<input class="name" id="pName" maxlength="10">
+<h3>遊玩紀錄</h3><div id="recs"></div>
+<h3>總積分與排名</h3><div id="ranks"></div>
+<button class="bt g sm" id="bClear">刪除遊玩紀錄鍵</button>
+</section>
+<section id="editor" class="view">
+<div id="edHead"></div><ul class="sl" id="songList"></ul>
+<button class="bt fab" id="bImport">匯入歌曲鍵</button>
+</section>
+<section id="game" class="view">
+<h3 id="gNo" style="text-align:center"></h3>
+<div class="bar"><i id="gBar"></i></div>
+<div class="q" id="gQ"></div><div class="opts" id="gOpts"></div>
+</section>
+</main>
+<div id="modals"></div>
+<script>
+const mem={};
+const ld=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return k in mem?mem[k]:d}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){mem[k]=v}};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const pad=n=>String(n).padStart(6,'0');
+const hash=async s=>{try{const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return[...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return 'x'+s}};
+let banksPub=[],curBank=null,curPw='',G={t:null};
+let P=ld('fof_player',{name:'玩家',records:[]});
+let PID=ld('fof_pid',null);
+if(!PID){PID=(crypto.randomUUID?crypto.randomUUID():String(Math.random()).slice(2)+Date.now());sv('fof_pid',PID)}
+const ready=Promise.resolve();
+$('#mode').textContent='🌐 已連線至 Netlify 資料庫';
+const api=async(a,d={})=>{
+  let r;
+  try{r=await fetch('/api',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({a,...d})})}
+  catch(e){throw new Error('無法連線到伺服器')}
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok||j.error)throw Object.assign(new Error(j.message||'伺服器錯誤'),{code:j.error});
+  return j;
+};
+const guard=async f=>{try{return await f()}catch(e){console.error(e);alrt('操作失敗：'+esc((e&&e.message)||'請稍後再試'));return false}};
+const getBank=async id=>{if(!/^\d{6}$/.test(id))return null;try{return(await api('get',{id})).bank}catch(e){if(e.code==='NOT_FOUND')return null;throw e}};
+const peekId=async()=>(await api('peek')).id;
+const saveProfile=async()=>sv('fof_player',P);
+
+/* ===== UI 工具 ===== */
+function modal(title,body,left,right){
+  const w=document.createElement('div');w.className='ov';
+  w.innerHTML=`<div class="md"><h3>${title}</h3><div class="mb">${body}</div><div class="mf"><span>${left?'<button class="bt g L">'+left[0]+'</button>':''}</span><button class="bt R">${right[0]}</button></div></div>`;
+  const close=()=>w.remove();
+  const run=async(f,btn)=>{btn.disabled=true;try{if(!f||(await f(w))!==false)close()}finally{btn.disabled=false}};
+  const L=w.querySelector('.L'),R=w.querySelector('.R');
+  if(L)L.onclick=()=>run(left[1],L);
+  R.onclick=()=>run(right[1],R);
+  $('#modals').appendChild(w);return w;
+}
+const alrt=(m,cb)=>modal('提示',`<p>${m}</p>`,null,['確認',cb]);
+const chips=(n,opts,d)=>`<div class="chips">${opts.map(([v,t])=>`<label><input type="radio" name="${n}" value="${v}" ${v===d?'checked':''}>${t}</label>`).join('')}</div>`;
+const val=(w,n)=>(w.querySelector(`[name=${n}]:checked`)||w.querySelector(`[name=${n}]`)).value;
+function go(v){
+  clearInterval(G.t);
+  document.querySelectorAll('.view').forEach(e=>e.classList.toggle('on',e.id===v));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  if(v==='overview')renderOverview();
+  if(v==='player')renderPlayer();
+  if(v==='editor')renderEditor();
+}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));
+const checkPw=async(b,p)=>{try{await api('auth',{id:b.id,password:p});return true}catch(e){if(e.code==='BAD_PW')return false;throw e}};
+
+/* ===== 主頁 ===== */
+$('#bCreate').onclick=async()=>{
+  await ready;let prev='';try{prev=await peekId()}catch(e){}
+  modal('建立題庫',`
+  <label class="f">題庫編號（建立時以系統實際配發為準）</label><input type="text" value="${prev}" readonly>
+  <label class="f">題庫名稱（10 字內）</label><input type="text" name="n" maxlength="10">
+  <label class="f">題庫介紹（25 字內）</label><input type="text" name="i" maxlength="25">
+  <label class="f">建立者（10 字內）</label><input type="text" name="c" maxlength="10">
+  <label class="f">密碼（8–15 字，英數字混合）</label><input type="password" name="p" maxlength="15">
+  <label class="f">是否公開</label>${chips('pub',[['1','公開鍵'],['0','私人鍵']],'1')}`,
+  ['取消'],['建立',w=>{
+    const n=val(w,'n').trim(),i=val(w,'i').trim(),c=val(w,'c').trim(),p=val(w,'p');
+    if(!n||!i||!c){alrt('請完整填寫題庫名稱、介紹與建立者');return false}
+    if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/.test(p)){alrt('密碼須為 8–15 字的英數字混合');return false}
+    const pub=val(w,'pub')==='1';
+    modal('提醒','<p>請您記下題庫編號與密碼，以便日後能夠重複編輯喔！</p>',['取消'],['確認',()=>guard(async()=>{
+      const {id}=await api('create',{name:n,intro:i,creator:c,password:p,pub}),b={id,name:n,intro:i,creator:c,pub,songs:[]};curPw=p;
+      w.remove();alrt(`題庫已建立！題庫編號：<b>${id}</b>`,()=>openEditor(b));
+    })]);
+    return false;
+  }]);
+};
+$('#bEdit').onclick=async()=>{await ready;modal('編輯題庫',`<label class="f">題庫編號</label><input type="text" name="id" maxlength="6" inputmode="numeric"><label class="f">密碼</label><input type="password" name="p">`,
+  null,['確認',w=>guard(async()=>{
+    const b=await getBank(val(w,'id').trim());
+    if(!b){alrt('該題庫不存在');return false}
+    if(!await checkPw(b,val(w,'p'))){alrt('密碼錯誤');return false}
+    curPw=val(w,'p');alrt(`進入題庫：${esc(b.name)}`,()=>openEditor(b));
+  })])};
+async function playById(){
+  await ready;
+  modal('遊玩題庫',`<label class="f">題庫編號</label><input type="text" name="id" maxlength="6" inputmode="numeric">`,null,['確認',w=>guard(async()=>{
+    const b=await getBank(val(w,'id').trim());
+    if(!b){alrt('該題庫不存在');return false}
+    openSettings(b,true);
+  })]);
+}
+$('#bPlay').onclick=playById;
+function openSettings(b,fromHome){
+  modal('遊玩設定',`<p><b>進入題庫：${esc(b.name)}</b><br><span class="mu">題庫介紹：${esc(b.intro)}</span></p>
+  <label class="f">遊玩題型</label>${chips('type',[['title','猜歌名'],['next','猜下句']],'title')}
+  <label class="f">題數</label>${chips('cnt',[['10','10題'],['20','20題'],['50','50題']],'10')}
+  <label class="f">每題秒數</label>${chips('sec',[['5','5秒'],['10','10秒'],['20','20秒']],'10')}`,
+  ['取消',()=>{if(fromHome)setTimeout(playById,0)}],['確認',w=>startGame(b,val(w,'type'),+val(w,'cnt'),+val(w,'sec'))]);
+}
+
+/* ===== 題庫總覽 ===== */
+async function renderOverview(){
+  const box=$('#ovList');box.innerHTML='<p class="mu" style="text-align:center">載入中…</p>';
+  let list;
+  try{list=(await api('list')).banks}catch(e){box.innerHTML='<p class="mu" style="text-align:center">'+esc(e.message)+'</p>';return}
+  banksPub=list;
+  box.innerHTML=list.length?'':'<p class="mu" style="text-align:center">目前還沒有公開題庫</p>';
+  list.forEach(b=>{
+    const d=document.createElement('div');d.className='card';
+    d.innerHTML=`<div class="mu">#${esc(b.id)}</div><h3>${esc(b.name)}</h3><div class="mu">${esc(b.intro)}</div>
+    <div class="top3"><b>積分排行榜</b>${b.top.length?b.top.map((x,i)=>`<div><span>${i+1}. ${esc(x.name)}</span><span>${x.total} 分</span></div>`).join(''):'<div class="mu">尚無紀錄</div>'}</div>
+    <button class="bt sm go">開始遊玩鍵</button>`;
+    d.querySelector('.go').onclick=()=>guard(async()=>{const f=await getBank(b.id);if(f)openSettings(f,false)});
+    box.appendChild(d);
+  });
+}
+/* ===== 玩家資料 ===== */
+let nt;
+$('#pName').oninput=e=>{P.name=e.target.value.slice(0,10).trim()||'玩家';sv('fof_player',P);clearTimeout(nt);nt=setTimeout(()=>api('rename',{playerId:PID,name:P.name}).catch(console.error),600)};
+async function renderPlayer(){
+  if(document.activeElement!==$('#pName'))$('#pName').value=P.name;
+  $('#recs').innerHTML=P.records.length?'<ul class="sl">'+P.records.slice().reverse().map(r=>`<li>${esc(r.b)} - +${r.pts}</li>`).join('')+'</ul>':'<p class="mu">尚無遊玩紀錄</p>';
+  $('#ranks').innerHTML='<p class="mu">載入中…</p>';
+  try{
+    const {rows}=await api('me',{playerId:PID});
+    $('#ranks').innerHTML=rows.map(s=>`<div class="card"><b>${esc(s.bankName||s.bankId)}</b><div class="mu">總積分 ${s.total}　｜　排名 第 ${s.rank} 名</div></div>`).join('')||'<p class="mu">尚無排名</p>';
+  }catch(e){$('#ranks').innerHTML='<p class="mu">'+esc(e.message)+'</p>'}
+}
+$('#bClear').onclick=()=>modal('刪除遊玩紀錄','<p>將清除你的所有遊玩紀錄，以及你在各題庫排行榜上的積分，確定嗎？</p>',['取消'],['確認',()=>guard(async()=>{await api('clear',{playerId:PID});P.records=[];sv('fof_player',P);renderPlayer()})]);
+
+/* ===== 題庫編輯器 ===== */
+function openEditor(b){curBank=b;go('editor')}
+function renderEditor(){
+  const b=curBank;
+  $('#edHead').innerHTML=`<h2>${esc(b.name)} <span class="mu">#${esc(b.id)}</span></h2><p class="mu">${esc(b.intro)}（${b.pub?'公開':'私人'}）</p><h3>歌曲列表</h3>`;
+  const ul=$('#songList');ul.innerHTML=b.songs.length?'':'<p class="mu">尚未匯入歌曲</p>';
+  b.songs.forEach((s,i)=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<button class="bt sm g">編輯鍵</button> ${esc(s.title)}`;
+    li.firstChild.onclick=()=>songModal(i);ul.appendChild(li);
+  });
+}
+$('#bImport').onclick=()=>songModal(-1);
+function songModal(idx){
+  const s=curBank.songs[idx]||{title:'',lyrics:''};
+  const w=modal(idx<0?'匯入歌曲':'編輯歌曲',`<label class="f">歌名</label><input type="text" name="t" value="${esc(s.title)}">
+  <label class="f">歌詞（一行一句）</label><div class="ed"><div class="gut"></div><textarea name="l" wrap="off"></textarea></div>`,
+  ['取消'],['確認鍵',w=>guard(async()=>{
+    const t=val(w,'t').trim(),lines=val(w,'l').split('\n');
+    if(!t){alrt('請輸入歌名');return false}
+    if(lines.some(x=>!x.trim())){alrt('請刪除歌詞中的空白行');return false}
+    const songs=curBank.songs.slice(),song={title:t,lyrics:lines.join('\n')};
+    if(idx<0)songs.push(song);else songs[idx]=song;
+    await api('saveSongs',{id:curBank.id,password:curPw,songs});curBank={...curBank,songs};
+    alrt(`歌名：${esc(t)} 已成功建立`,renderEditor);
+  })]);
+  const ta=w.querySelector('textarea'),g=w.querySelector('.gut');ta.value=s.lyrics;
+  const upd=()=>{const n=Math.max(5,ta.value.split('\n').length);g.innerHTML=Array.from({length:n},(_,i)=>i+1).join('<br>');g.scrollTop=ta.scrollTop};
+  ta.oninput=upd;ta.onscroll=()=>g.scrollTop=ta.scrollTop;upd();
+}
+
+/* ===== 遊玩模式 ===== */
+function startGame(b,type,count,secs){
+  const lines=[];
+  b.songs.forEach((s,si)=>{const L=s.lyrics.split('\n');L.forEach((t,i)=>lines.push({si,t,last:i===L.length-1,next:L[i+1]}))});
+  const titles=[...new Set(b.songs.map(s=>s.title))],texts=[...new Set(lines.map(l=>l.t))];
+  const pool=type==='title'?lines:lines.filter(l=>!l.last);
+  if(!pool.length||(type==='title'?titles.length:texts.length)<4){alrt(type==='title'?'此題庫至少需要 4 首不同歌名的歌曲才能遊玩「猜歌名」':'此題庫至少需要 4 行不同歌詞（且有下一句）才能遊玩「猜下句」');return false}
+  const qs=[];let sh=shuf(pool);
+  while(qs.length<count){if(!sh.length)sh=shuf(pool);const l=sh.pop();
+    const ans=type==='title'?b.songs[l.si].title:l.next;
+    const wrong=shuf((type==='title'?titles:texts).filter(x=>x!==ans)).slice(0,3);
+    const opts=shuf([ans,...wrong]);qs.push({q:l.t,opts,ai:opts.indexOf(ans)});}
+  G={b,type,secs,qs,i:0,ok:0,locked:false,t:null};
+  go('game');showQ();
+}
+function showQ(){
+  if(G.i>=G.qs.length)return finish();
+  const q=G.qs[G.i];G.locked=false;
+  $('#gNo').textContent=`第 ${G.i+1} 題 / ${G.qs.length}`;
+  $('#gQ').innerHTML=`<div class="mu" style="font-size:14px">${G.type==='title'?'這句歌詞出自哪首歌？':'下一句是什麼？'}</div>${esc(q.q)}`;
+  const o=$('#gOpts');o.innerHTML='';
+  q.opts.forEach((t,i)=>{const bt=document.createElement('button');bt.className='opt';bt.textContent=t;bt.onclick=()=>answer(i);o.appendChild(bt)});
+  const bar=$('#gBar');bar.style.width='100%';const t0=Date.now();
+  clearInterval(G.t);
+  G.t=setInterval(()=>{const r=1-(Date.now()-t0)/(G.secs*1000);bar.style.width=Math.max(0,r*100)+'%';if(r<=0)answer(-1)},50);
+}
+function answer(k){
+  if(G.locked)return;G.locked=true;clearInterval(G.t);
+  const q=G.qs[G.i],bs=document.querySelectorAll('.opt');
+  bs[q.ai].classList.add('ok');if(k>=0&&k!==q.ai)bs[k].classList.add('no');
+  if(k===q.ai)G.ok++;
+  setTimeout(()=>{G.i++;showQ()},1100);
+}
+function finish(){
+  const pts=G.ok*10,{b}=G;
+  modal('結算',`<p style="font-size:18px">總答對題數：<b>${G.ok}</b> / ${G.qs.length}</p><p style="font-size:18px">獲得積分：<b>${pts}</b></p>`,
+  null,['確認鍵',()=>guard(async()=>{
+    await ready;P.records.push({b:b.name,pts});
+    try{await api('submit',{bankId:b.id,playerId:PID,name:P.name,pts});sv('fof_player',P)}catch(e){P.records.pop();throw e}
+    go('home');
+  })]);
+}
+</script>
+</body>
+</html>
