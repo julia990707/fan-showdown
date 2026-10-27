@@ -215,7 +215,8 @@ $('#bClear').onclick=()=>modal('刪除遊玩紀錄','<p>將清除你的所有遊
 function openEditor(b){curBank=b;go('editor')}
 function renderEditor(){
   const b=curBank;
-  $('#edHead').innerHTML=`<h2>${esc(b.name)} <span class="mu">#${esc(b.id)}</span></h2><p class="mu">${esc(b.intro)}（${b.pub?'公開':'私人'}）</p><h3>歌曲列表</h3>`;
+  $('#edHead').innerHTML=`<h2>${esc(b.name)} <span class="mu">#${esc(b.id)}</span></h2><p class="mu">${esc(b.intro)}（${b.pub?'公開':'私人'}）</p><div style="display:flex;gap:8px;margin:8px 0"><button class="bt sm g" id="bInfo">編輯基本資料</button><button class="bt sm g" id="bDel" style="color:var(--no)">刪除題庫</button></div><h3>歌曲列表</h3>`;
+  $('#bInfo').onclick=infoModal;$('#bDel').onclick=delModal;
   const ul=$('#songList');ul.innerHTML=b.songs.length?'':'<p class="mu">尚未匯入歌曲</p>';
   b.songs.forEach((s,i)=>{
     const li=document.createElement('li');
@@ -240,6 +241,29 @@ function songModal(idx){
   const ta=w.querySelector('textarea'),g=w.querySelector('.gut');ta.value=s.lyrics;
   const upd=()=>{const n=Math.max(5,ta.value.split('\n').length);g.innerHTML=Array.from({length:n},(_,i)=>i+1).join('<br>');g.scrollTop=ta.scrollTop};
   ta.oninput=upd;ta.onscroll=()=>g.scrollTop=ta.scrollTop;upd();
+}
+
+function infoModal(){
+  const b=curBank;
+  modal('編輯基本資料',`<label class="f">題庫編號</label><input type="text" value="${esc(b.id)}" readonly>
+  <label class="f">題庫名稱（10 字內）</label><input type="text" name="n" maxlength="10" value="${esc(b.name)}">
+  <label class="f">題庫介紹（25 字內）</label><input type="text" name="i" maxlength="25" value="${esc(b.intro)}">
+  <label class="f">建立者（10 字內）</label><input type="text" name="c" maxlength="10" value="${esc(b.creator||'')}">
+  <label class="f">是否公開</label>${chips('pub',[['1','公開鍵'],['0','私人鍵']],b.pub?'1':'0')}`,
+  ['取消'],['儲存',w=>guard(async()=>{
+    const n=val(w,'n').trim(),i=val(w,'i').trim(),c=val(w,'c').trim(),pub=val(w,'pub')==='1';
+    if(!n||!i||!c){alrt('請完整填寫題庫名稱、介紹與建立者');return false}
+    await api('updateBank',{id:b.id,password:curPw,name:n,intro:i,creator:c,pub});
+    curBank={...curBank,name:n,intro:i,creator:c,pub};renderEditor();
+  })]);
+}
+function delModal(){
+  const b=curBank;
+  modal('刪除題庫',`<p>確定要刪除「${esc(b.name)}」嗎？題庫內所有歌曲與排行榜積分都會一併刪除，且無法復原。</p>`,
+  ['取消'],['確認刪除',()=>guard(async()=>{
+    await api('deleteBank',{id:b.id,password:curPw});curBank=null;curPw='';
+    alrt('題庫已刪除',()=>go('home'));
+  })]);
 }
 
 /* ===== 遊玩模式 ===== */
