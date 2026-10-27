@@ -81,6 +81,27 @@ const H = {
     await s.setJSON('bank/' + r.bank.id, { ...r.bank, songs: clean });
     return json({ ok: true });
   },
+  async updateBank(d, s) {
+    const r = await authed(s, d);
+    if (r.e) return r.e;
+    const name = str(d.name, 10), intro = str(d.intro, 25), creator = str(d.creator, 10);
+    if (!name || !intro || !creator) return err('INVALID', '請完整填寫題庫名稱、介紹與建立者');
+    await s.setJSON('bank/' + r.bank.id, { ...r.bank, name, intro, creator, pub: !!d.pub });
+    const { blobs } = await s.list({ prefix: `score/${r.bank.id}/` });
+    for (const b of blobs) {
+      const x = await getJ(s, b.key);
+      if (x && x.bankName !== name) await s.setJSON(b.key, { ...x, bankName: name });
+    }
+    return json({ ok: true });
+  },
+  async deleteBank(d, s) {
+    const r = await authed(s, d);
+    if (r.e) return r.e;
+    const { blobs } = await s.list({ prefix: `score/${r.bank.id}/` });
+    for (const b of blobs) await s.delete(b.key);
+    await s.delete('bank/' + r.bank.id);
+    return json({ ok: true });
+  },
   async list(d, s) {
     const { blobs } = await s.list({ prefix: 'bank/' });
     const all = (await Promise.all(blobs.map(b => getJ(s, b.key)))).filter(b => b && b.pub);
